@@ -38,9 +38,9 @@ export default function withApollo<TCache = any>(
       };
 
       public static getInitialProps = async (appCtx: ApolloContext) => {
-        const { AppTree, ctx } = appCtx;
+        const { AppTree, ctx, router } = appCtx;
         const headers = ctx.req ? ctx.req.headers : {};
-        const apollo = initApollo<TCache>(client, { ctx, headers });
+        const apollo = initApollo<TCache>(client, { router, ctx, headers });
         const apolloState: WithApolloState<TCache> = {};
         const getInitialProps = App.getInitialProps;
 
@@ -107,6 +107,7 @@ export default function withApollo<TCache = any>(
         this.apollo =
           props.apollo ||
           initApollo<TCache>(client, {
+            router: props.router,
             initialState: props.apolloState.data
           });
       }

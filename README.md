@@ -34,7 +34,7 @@ import ApolloClient, { InMemoryCache } from 'apollo-boost';
 import { GRAPHQL_URL } from '../configs';
 
 export default withApollo(
-  ({ ctx, headers, initialState }) =>
+  ({ ctx, headers, initialState, router }) =>
     new ApolloClient({
       uri: GRAPHQL_URL,
       cache: new InMemoryCache().restore(initialState || {})
@@ -42,10 +42,10 @@ export default withApollo(
 );
 ```
 
-`withApollo` accepts a function that receives `{ ctx, headers }` in the first render with SSR (Server Side Rendering). This is done to fetch your queries and [hydrate the store](https://dev-blog.apollodata.com/how-server-side-rendering-works-with-react-apollo-20f31b0c7348)
+`withApollo` accepts a function that receives `{ ctx, headers, router }` in the first render with SSR (Server Side Rendering). This is done to fetch your queries and [hydrate the store](https://dev-blog.apollodata.com/how-server-side-rendering-works-with-react-apollo-20f31b0c7348)
 before we send the page to the browser.
 
-`withApollo` will receive `{ initialState }` if the render is happening in the browser, with the following line we're hydrating our cache with the initial state created in the server:
+`withApollo` will receive `{ initialState, router }` if the render is happening in the browser, with the following line we're hydrating our cache with the initial state created in the server:
 
 ```js
 cache: new InMemoryCache().restore(initialState || {});

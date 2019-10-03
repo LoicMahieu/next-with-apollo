@@ -2,6 +2,7 @@ import ApolloClient from 'apollo-client';
 import { IncomingHttpHeaders } from 'http';
 import { NextPageContext } from 'next';
 import { AppContext } from 'next/app';
+import { NextRouter } from 'next/dist/client/router';
 
 export interface WithApolloOptions {
   getDataFromTree?: 'always' | 'never' | 'ssr';
@@ -17,6 +18,7 @@ export interface WithApolloProps<TCache> {
 }
 
 export interface InitApolloOptions<TCache> {
+  router: NextRouter;
   ctx?: NextPageContext;
   headers?: IncomingHttpHeaders;
   initialState?: TCache;
