@@ -7,7 +7,7 @@ let _apolloClient: ApolloClient<any>;
 
 export default function initApollo<TCache = any>(
   clientFn: InitApolloClient<TCache>,
-  options?: InitApolloOptions<TCache>
+  options: InitApolloOptions<TCache>
 ): ApolloClient<TCache> {
   if (!clientFn) {
     throw new Error(
@@ -27,7 +27,7 @@ export default function initApollo<TCache = any>(
 
 function getClient<TCache>(
   clientFn: InitApolloClient<TCache>,
-  options: InitApolloOptions<TCache> = {}
+  options: InitApolloOptions<TCache>
 ) {
   if (typeof clientFn !== 'function') {
     throw new Error(
